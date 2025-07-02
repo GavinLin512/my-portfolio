@@ -1,0 +1,51 @@
+---
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+// import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@components/ui/dialog";
+// import { ResumeBuilderForm } from "@/components/ResumeBuilderForm";
+import { Briefcase, GraduationCap, Sparkles, Bot } from "@lucide/astro";
+import { experience, education, skills } from "@/data/datas";
+import TabWrapper from "@/components/TabWrapper";
+---
+
+<section id="resume" class="bg-muted/50 pt-20 pb-36 ">
+  <div class="container">
+    <div class="text-center">
+      <h2 class="text-3xl font-bold md:text-4xl">經歷、學歷與技能</h2>
+      <p class="mt-2 text-lg text-muted-foreground">
+        A summary of my experience, education, and skills.
+      </p>
+    </div>
+    <div class="mx-auto mt-12 max-w-4xl h-auto">
+      <TabWrapper client:visible />
+    </div>
+    <div class="mt-12 text-center">
+      <!-- <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+        <DialogTrigger asChild>
+          <Button
+            size="lg"
+            variant="default"
+            className="bg-accent text-accent-foreground hover:bg-accent/90"
+          >
+            <Bot class="mr-2" /> AI Resume Builder
+          </Button>
+        </DialogTrigger>
+        <DialogContent className="sm:max-w-3xl">
+          <DialogHeader>
+            <DialogTitle>AI-Powered Resume Customizer</DialogTitle>
+            <DialogDescription>
+              Paste a job description below. Our AI will tailor my resume to
+              highlight the most relevant skills and experience.
+            </DialogDescription>
+          </DialogHeader>
+          <ResumeBuilderForm
+            onFinished={() => {
+              /* maybe close dialog after some time */
+            }}
+          />
+        </DialogContent>
+      </Dialog> -->
+    </div>
+  </div>
+</section>

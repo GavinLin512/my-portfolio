@@ -1,33 +1,67 @@
 ---
-import { Button } from "@components/ui/button";
+import { Button } from "@/components/ui/button";
+import { Github, Mail } from "lucide-preact";
 ---
 
 <section
   id="hero"
-  class="container grid items-center gap-10 py-20 lg:grid-cols-2 md:py-32 md:px-20 px-3"
+  class="container grid items-center gap-10 py-20 lg:grid-cols-2 md:py-32"
 >
   <div class="flex flex-col items-start gap-4">
     <h1 class="text-4xl font-bold tracking-tighter !leading-tight md:text-6xl">
-      Hi, I'm Astro. A Front-End Engineer.
+      Hi, I'm Grayson. <br />A Web Developer.
     </h1>
     <p class="text-lg text-muted-foreground">
-      I specialize in building exceptional, high-quality websites and
-      applications. With a passion for modern web technologies and a keen eye
-      for design, I bring ideas to life with clean, efficient code.
+      目前為一名全端工程師，對於前後端框架都有極高的學習熱情。
+      <br />
+      轉職後透過自學與線上課程持續累積自身開發專案經驗，
+      <br />
+      目前有三年多的大型全端專案開發經驗，
+      <br />
+      並持續累積前後端框架開發經驗與技術。
+    </p>
+    <p class="text-lg text-muted-foreground">
+      平時喜歡研究如何使用工具及框架來提升工作及團隊合作效率，
+      <br />
+      並利用現有知識結合開發經驗來解決問題。
+      <br />
+      期望在獨立解決問題的同時也能與團隊順利協作，
+      <br />
+      解決問題的成就感就是我工作的熱忱所在。
     </p>
     <div class="flex gap-4">
       <Button size="lg" client:load>
-        <a href="#contact">Get In Touch</a>
+        <a href="#resume">我的經歷</a>
       </Button>
       <Button size="lg" variant="outline" client:load>
-        <a href="#projects">View My Work</a>
+        <a href="#projects">過往專案</a>
       </Button>
+    </div>
+    <div class="flex justify-center gap-6">
+      <div class="flex justify-center gap-6">
+        <a
+          href="https://github.com/GavinLin512"
+          target="_blank"
+          aria-label="GitHub"
+          class="text-muted-foreground transition-colors hover:text-primary"
+        >
+          <Github className="h-7 w-7" />
+        </a>
+        <a
+          href="mailto:gavinlin512@gmail.com"
+          target="_blank"
+          aria-label="Email"
+          class="text-muted-foreground transition-colors hover:text-primary"
+        >
+          <Mail className="h-7 w-7" />
+        </a>
+      </div>
     </div>
   </div>
   <div class="hidden lg:block">
     <img
-      class="aspect-square rounded-full object-cover shadow-2xl"
-      src="https://placehold.co/600x600.png"
+      class="w-[600px] h-[600px] aspect-square rounded-full object-cover shadow-2xl"
+      src="/public/personal_photo.jpg"
       alt="Developer portrait"
     />
   </div>

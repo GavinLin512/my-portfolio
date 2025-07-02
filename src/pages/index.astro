@@ -1,8 +1,27 @@
 ---
-import PortfolioLayout from "@layouts/PortfolioLayout.astro";
-import HeroSection from "@components/HeroSection.astro";
+import "../styles/global.css";
+import PortfolioLayout from "@/layouts/PortfolioLayout.astro";
+import HeroSection from "@/components/HeroSection.astro";
+import ProjectSection from "@/components/ProjectSection.astro";
+import ResumeSection from "@/components/ResumeSection.astro";
 ---
 
-<PortfolioLayout>
-  <HeroSection />
-</PortfolioLayout>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>林家民的個人履歷</title>
+  </head>
+  <body>
+    <PortfolioLayout>
+      <HeroSection />
+      <ProjectSection />
+      <ResumeSection />
+      <footer class="text-center p-4 text-muted-foreground text-sm">
+        © {new Date().getFullYear()} Grayson Lin. All Rights Reserved.
+      </footer>
+    </PortfolioLayout>
+  </body>
+</html>
