@@ -1,6 +1,7 @@
 ---
 import { Button } from "@/components/ui/button";
 import { Github, Mail } from "lucide-preact";
+import { Image } from "astro:assets";
 ---
 
 <section
@@ -12,7 +13,7 @@ import { Github, Mail } from "lucide-preact";
       Hi, I'm Grayson. <br />A Web Developer.
     </h1>
     <p class="text-lg text-muted-foreground">
-      目前為一名全端工程師，對於前後端框架都有極高的學習熱情。
+      我是林家民，目前為一名全端工程師，對於前後端框架都有極高的學習熱情。
       <br />
       轉職後透過自學與線上課程持續累積自身開發專案經驗，
       <br />
@@ -59,10 +60,12 @@ import { Github, Mail } from "lucide-preact";
     </div>
   </div>
   <div class="hidden lg:block">
-    <img
-      class="w-[600px] h-[600px] aspect-square rounded-full object-cover shadow-2xl"
-      src="/public/personal_photo.jpg"
+    <Image
+      src="/personal_photo.jpg"
       alt="Developer portrait"
+      width={600}
+      height={600}
+      class="w-[600px] h-[600px] aspect-square rounded-full object-cover shadow-2xl"
     />
   </div>
 </section>
