@@ -155,7 +155,3 @@
     @apply bg-background text-foreground;
   }
 }
-
-* {
-  box-sizing: border-box;
-}
