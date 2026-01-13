@@ -1,7 +1,10 @@
-// 定義 Project 的資料結構型別
+// 定義 Project 資料結構型別
 export interface Project {
   title: string;
-  descriptions: string[];
+  descriptions: {
+    title: string;
+    content: string;
+  }[];
   tags: string[];
   liveUrl: string;
   githubUrl: string;

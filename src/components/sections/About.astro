@@ -1,0 +1,77 @@
+---
+import { Image } from "astro:assets";
+import { skills } from "@/data/datas";
+import { Reveal } from "@/components/ui/Reveal";
+import { Badge } from "@/components/ui/badge";
+import { getTechConfig } from "@/data/techMap";
+import { cn } from "@/lib/utils";
+---
+
+<section id="about" class="grid md:grid-cols-2 gap-12 md:gap-24 items-center">
+  <div class="space-y-8 order-2 md:order-1">
+    <Reveal client:visible>
+      <div class="flex items-center gap-2 text-2xl font-bold text-white mb-4">
+        <span class="text-primary">⚡</span> About Me
+      </div>
+    </Reveal>
+
+    <Reveal client:visible delay={0.1}>
+      <div class="space-y-8 text-muted-foreground leading-relaxed text-lg">
+        <p>
+            我是林家民，目前為一名全端工程師，對於前後端框架都有極高的學習熱情。
+            目前有三年多的大型全端專案開發經驗，
+            並持續累積前後端框架開發經驗與技術。
+        </p>
+        <p>
+            平時喜歡研究如何使用工具及框架來優化開發流程及提升團隊合作效率，
+            以及導入 AI Agent 來提升開發效率，
+            並利用現有知識結合開發經驗來解決問題。
+        </p>
+        <p>
+            在獨立作業解決問題的同時，也能與團隊順利協作，
+            解決問題的成就感就是我工作的熱忱所在。
+        </p>
+      </div>
+    </Reveal>
+
+    <!-- Skills Pills -->
+    <Reveal client:visible delay={0.2}>
+      <div class="flex flex-wrap gap-3 pt-4">
+        {skills.map(skill => {
+          const tech = getTechConfig(skill);
+          return (
+            <Badge 
+              variant="outline" 
+              className="gap-2 px-3 py-1.5 text-base"
+              style={{
+                color: tech.hex,
+                backgroundColor: `${tech.hex}1A`,
+                borderColor: `${tech.hex}80`,
+              }}
+            >
+              <i class={cn(tech.iconClass, "text-base")}></i>
+              {skill}
+            </Badge>
+          );
+        })}
+      </div>
+    </Reveal>
+  </div>
+
+  <div class="relative order-1 md:order-2 flex justify-center md:justify-end group">
+    <Reveal client:visible delay={0.3} className="relative">
+      <!-- Decoration behind image -->
+      <div class="absolute top-0 right-0 w-32 h-32 dot-grid-decoration opacity-30 -translate-y-8 translate-x-8"></div>
+      
+      <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-secondary shadow-2xl shadow-primary/10">
+        <Image
+          src="/personal_photo.jpg"
+          alt="Grayson Lin"
+          width={400}
+          height={400}
+          class="w-full h-full object-cover"
+        />
+      </div>
+    </Reveal>
+  </div>
+</section>

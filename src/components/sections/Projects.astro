@@ -1,0 +1,110 @@
+---
+import { projects } from "@/data/datas";
+import { Badge } from "@/components/ui/badge";
+import { getTechConfig } from "@/data/techMap";
+import { cn } from "@/lib/utils";
+import { Reveal } from "@/components/ui/Reveal";
+import { ImagesSlider } from "@/components/ui/images-slider";
+import { motion } from "motion/react";
+import { ProjectAccordion } from "@/components/ui/project-accordion"
+---
+
+<section id="projects" class="space-y-16">
+  <Reveal client:visible>
+    <h2 class="text-3xl font-bold text-white flex items-center gap-2 mb-4">
+        <span class="text-primary">/</span> Projects
+    </h2>
+  </Reveal>
+
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+    {projects.map((project, index) => (
+      <Reveal client:visible delay={index * 0.1} className="h-full">
+        <div class="group hover-gradient-border rounded-xl h-full transition-all duration-300 hover:-translate-y-1">
+          <article class="bg-card border border-white/5 group-hover:border-transparent rounded-xl overflow-hidden h-full flex flex-col">
+            <div class="aspect-video bg-secondary relative overflow-hidden shrink-0">
+            <ImagesSlider
+              className="w-full h-full"
+              images={project.images}
+              overlay={false}
+              client:visible
+            >
+              <motion.div
+                initial={{
+                  opacity: 0,
+                  y: -80,
+                }}
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                }}
+                transition={{
+                  duration: 0.6,
+                }}
+                className="z-50 flex flex-col justify-center items-center"
+              >
+                <motion.p className="font-bold text-xl md:text-6xl text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 py-4">
+                  {project.title}
+                </motion.p>
+              </motion.div>
+            </ImagesSlider>
+            <div class="absolute inset-0 bg-black/50 group-hover:bg-black/20 transition-colors duration-300"></div>
+          </div>
+          
+          <div class="p-6 space-y-4 flex flex-col flex-1">
+            <div class="flex justify-between items-start">
+              <h3 class="text-xl font-bold text-white group-hover:text-primary transition-colors">
+                {project.title}
+              </h3>
+            </div>
+            
+            <ProjectAccordion items={project.descriptions as unknown as { title: string; content: string }[]} client:visible />
+            
+            <div class="flex flex-wrap gap-2 pt-2 mt-auto">
+              {project.tags.map(tag => {
+                const tech = getTechConfig(tag);
+                return (
+                  <Badge 
+                    variant="outline" 
+                    className="gap-2 px-2.5 py-1 text-sm font-mono"
+                    style={{
+                      color: tech.hex,
+                      backgroundColor: `${tech.hex}1A`, // 10% 透明度
+                      borderColor: `${tech.hex}80`,     // 50% 透明度
+                    }}
+                  >
+                    <i class={cn(tech.iconClass, "text-sm")}></i>
+                    {tag}
+                  </Badge>
+                );
+              })}
+            </div>
+          </div>
+        </article>
+        </div>
+      </Reveal>
+    ))}
+  </div>
+</section>
+
+<script>
+  function initGradientCards() {
+    const cards = document.querySelectorAll('.hover-gradient-border');
+    
+    cards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = (card as HTMLElement).getBoundingClientRect();
+        const x = (e as MouseEvent).clientX - rect.left;
+        const y = (e as MouseEvent).clientY - rect.top;
+        
+        (card as HTMLElement).style.setProperty('--mouse-x', `${x}px`);
+        (card as HTMLElement).style.setProperty('--mouse-y', `${y}px`);
+      });
+    });
+  }
+
+  // Initialize on load
+  initGradientCards();
+
+  // Re-initialize after view transitions (if any)
+  document.addEventListener('astro:page-load', initGradientCards);
+</script>

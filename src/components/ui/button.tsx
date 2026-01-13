@@ -35,12 +35,12 @@ const buttonVariants = cva(
   }
 )
 
-// 用 forwardRef 包裹，根據 asChild 決定 ref 型別
+// 根據 asChild 決定是否使用 Slot
 const Button = React.forwardRef<any, React.ComponentProps<"button"> & VariantProps<typeof buttonVariants> & { asChild?: boolean }>(
   (props, ref) => {
     const { className, variant, size, asChild = false, ...rest } = props
     if (asChild) {
-      // 移除 ref，避免傳給 Slot
+      // 使用 Slot 時移除 ref
       const { ref: _ref, ...restWithoutRef } = rest as any
       return (
         <Slot
