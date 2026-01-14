@@ -4,44 +4,55 @@ import {
   AccordionTrigger,
   AccordionContent,
   AccordionHeader,
+  useAccordionItem,
 } from '@/components/ui/animate-ui/primitives/radix/accordion';
-import { Sparkles } from "lucide-preact";
+import { Plus } from "lucide-preact";
+import { motion } from "motion/react";
 
 type ProjectAccordionProps = {
-  multiple?: boolean;
   collapsible?: boolean;
   keepRendered?: boolean;
   items: {
     title: string;
     content: string;
   }[]; 
-  defaultOpen?: boolean;  // 新增：是否預設開啟第一個
+  defaultOpen?: boolean;
 };
 
+function AccordionIcon() {
+  const { isOpen } = useAccordionItem();
+  
+  return (
+    <motion.div
+      animate={{ rotate: isOpen ? 45 : 0 }}
+      transition={{ duration: 0.2, ease: "easeOut" }}
+      className="shrink-0 w-4 h-4 mr-2 flex items-center justify-center"
+      style={{ transformOrigin: "center center" }}
+    >
+      <Plus className="text-primary w-4 h-4" />
+    </motion.div>
+  );
+}
+
 export const ProjectAccordion = ({
-  multiple = false,
   collapsible = true,
   keepRendered = false,
   items,
-  defaultOpen = true,  // 預設開啟第一個
+  defaultOpen = true,
 }: ProjectAccordionProps) => {
-  const defaultValue = defaultOpen
-      ? multiple
-        ? ["item-1"]
-        : "item-1"
-      : undefined;
   return (
     <Accordion
-      type={multiple ? "multiple" : "single"}
+      type="single"
       collapsible={collapsible}
       className="max-w-[400px] w-full"
-      defaultValue={defaultValue}
+      defaultValue={defaultOpen ? "item-1" : undefined}
     >
       {items.map((item, index) => (
         <AccordionItem key={index} value={`item-${index + 1}`}>
           <AccordionHeader>
-            <AccordionTrigger className="border-b border-white/20 py-2 w-full text-start flex">
-              <Sparkles className="text-primary pr-2"></Sparkles>{item.title}
+            <AccordionTrigger className="border-b border-white/20 py-2 w-full text-start flex items-center">
+              <AccordionIcon />
+              {item.title}
             </AccordionTrigger>
           </AccordionHeader>
           <AccordionContent keepRendered={keepRendered}>
