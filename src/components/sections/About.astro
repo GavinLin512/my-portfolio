@@ -1,5 +1,5 @@
 ---
-import { Image } from "astro:assets";
+import { DigitalPrismPhoto } from "@/components/ui/digital-prism-photo";
 import { skills } from "@/data/datas";
 import { Reveal } from "@/components/ui/Reveal";
 import { Badge } from "@/components/ui/badge";
@@ -63,13 +63,12 @@ import { cn } from "@/lib/utils";
       <!-- Decoration behind image -->
       <div class="absolute top-0 right-0 w-32 h-32 dot-grid-decoration opacity-30 -translate-y-8 translate-x-8"></div>
       
-      <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-secondary shadow-2xl shadow-primary/10">
-        <Image
+      <div class="w-64 h-64 md:w-80 md:h-80">
+        <DigitalPrismPhoto
+          client:visible
           src="/personal_photo.jpg"
           alt="Grayson Lin"
-          width={400}
-          height={400}
-          class="w-full h-full object-cover"
+          className="w-full h-full"
         />
       </div>
     </Reveal>

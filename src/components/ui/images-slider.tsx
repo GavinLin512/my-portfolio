@@ -11,6 +11,7 @@ export const ImagesSlider = ({
   className,
   autoplay = true,
   direction = "up",
+  alt = "",
 }: {
   images: string[];
   children: React.ReactNode;
@@ -19,6 +20,8 @@ export const ImagesSlider = ({
   className?: string;
   autoplay?: boolean;
   direction?: "up" | "down";
+  /** 圖片替代文字，可為單一字串或對應每張圖片的陣列 */
+  alt?: string | string[];
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -95,7 +98,7 @@ export const ImagesSlider = ({
       opacity: 1,
       transition: {
         duration: 0.5,
-        ease: [0.645, 0.045, 0.355, 1.0],
+        ease: [0.645, 0.045, 0.355, 1.0] as [number, number, number, number],
       },
     },
     upExit: {
@@ -112,7 +115,7 @@ export const ImagesSlider = ({
         duration: 1,
       },
     },
-  };
+  } as const;
 
   const areImagesLoaded = loadedImages.length > 0;
 
@@ -138,6 +141,7 @@ export const ImagesSlider = ({
           <motion.img
             key={currentIndex}
             src={loadedImages[currentIndex]}
+            alt={Array.isArray(alt) ? alt[currentIndex] ?? "" : alt}
             initial="initial"
             animate="visible"
             exit={direction === "up" ? "upExit" : "downExit"}
